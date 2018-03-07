@@ -9,6 +9,7 @@ public class ComponenteRest {
 	
 	@RequestMapping("/saludar")
 	String saludo() {
+		System.out.println("-------------- SALUDANDO A UN CLIENTE -------------");
 		return "Hola Mundo";
 	}
 	

@@ -18,7 +18,7 @@ import ejemplo.entities.ClienteEntity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest // Carga el contexto de Spring asociado a @SpringBootApplicacion
-public class A03A_DaoTest {
+public class A05A_DaoTest {
 	@Autowired
 	private ClientesDao clientesDao;
 	
