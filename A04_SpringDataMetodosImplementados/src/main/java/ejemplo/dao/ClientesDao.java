@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import ejemplo.entities.ClienteEntity;
 
-public interface ClientesDao extends JpaRepository<ClienteEntity, Long>{
+public interface ClientesDao extends JpaRepository<ClienteEntity, Long>,ClientesDaoCustom{
 	List<ClienteEntity> findClientesByApellidosLike(String ape);
 	List<ClienteEntity> findClientesByApellidosContaining(String ape);
 	@Query("select c from ClienteEntity c where c.provincia.provincia"

@@ -38,13 +38,6 @@ public class A03A_DaoTest {
 		assertNotNull(clientes);
 		assertTrue(clientes.size()>0);
 		System.out.println("Encontrados: " + clientes.size());
-//		clientes.forEach(new Consumer<ClienteEntity>() {
-//			@Override
-//			public void accept(ClienteEntity c) {
-//				assertTrue(c.getApellidos().toLowerCase().contains("ez"));
-//				
-//			}
-//		});
 		clientes.forEach(c ->{
 				assertTrue(c.getApellidos().toLowerCase().contains("ez"));
 				System.out.println(c);
@@ -61,6 +54,26 @@ public class A03A_DaoTest {
 				assertTrue(c.getProvincia().getProvincia().toLowerCase().contains("ba"));
 				System.out.println(c + " " + c.getProvincia().getProvincia());
 		});
+	}
+	@Test
+	public void editarUno() {
+		// ---------- CLIENTE ALEATORIO -------------
+		List<ClienteEntity> clientes = clientesDao.findAll();
+		int n = (int)Math.floor(clientes.size()*Math.random());
+		ClienteEntity cliente = clientes.get(n);
+		System.out.println("ANTES: "  + cliente);
+		// ---------- EDITAR EL CLIENTE ----------
+		cliente.setNombre("Pepito");
+		cliente.setApellidos("Editado" + n);
+		System.out.println("DESPUES: "  + cliente);
+		clientesDao.actualizarSinInsertar(cliente);
+		// ---------- BUSCO EL EDITADO ----------------
+		ClienteEntity otro = clientesDao.findClientesByApellidosLike("Editado" + n).get(0);
+		assertEquals(cliente.getDni(), otro.getDni());
+		assertEquals("Pepito", otro.getNombre());
+		assertEquals("Editado" + n, otro.getApellidos());
+		assertEquals(cliente.getSaldo(), otro.getSaldo(),0.001);
+		
 	}
 	
 }
