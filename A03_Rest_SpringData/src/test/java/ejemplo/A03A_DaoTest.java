@@ -2,7 +2,9 @@ package ejemplo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -22,14 +24,43 @@ public class A03A_DaoTest {
 	
 	@Test
 	public void buscarClavePrimaria() {
-//		ClienteEntity cliente = clientesDao.getOne(1L);
-//		System.out.println("Cliente getOne: " + cliente);
 		Optional<ClienteEntity> resul = clientesDao.findById(1L);
-		ClienteEntity cliente2 = resul.orElse(new ClienteEntity(0,"","",0));
-		System.out.println("Cliente findById: " + cliente2);
-		assertNotNull(cliente2);
-		assertEquals(1L, cliente2.getDni());
+		ClienteEntity cliente = resul.orElse(new ClienteEntity(0,"","",0));
+		System.out.println("Cliente findById: " + cliente);
+		assertNotNull(cliente);
+		assertEquals(1L, cliente.getDni());
+		assertEquals("Victor", cliente.getNombre());
 	}
-	
+	@Test
+	public void buscarPorApellidos() {
+		List<ClienteEntity> clientes = clientesDao
+				.findClientesByApellidosContaining("ez");
+		assertNotNull(clientes);
+		assertTrue(clientes.size()>0);
+		System.out.println("Encontrados: " + clientes.size());
+//		clientes.forEach(new Consumer<ClienteEntity>() {
+//			@Override
+//			public void accept(ClienteEntity c) {
+//				assertTrue(c.getApellidos().toLowerCase().contains("ez"));
+//				
+//			}
+//		});
+		clientes.forEach(c ->{
+				assertTrue(c.getApellidos().toLowerCase().contains("ez"));
+				System.out.println(c);
+		});
+	}
+	@Test
+	public void buscarClientesConProvinciaBa() {
+		List<ClienteEntity> clientes = clientesDao
+				.buscarClientesConProvinciaQueContenga("%Ba%");
+		assertNotNull(clientes);
+		assertTrue(clientes.size()>0);
+		System.out.println("Encontrados con BA: " + clientes.size());
+		clientes.forEach(c ->{
+				assertTrue(c.getProvincia().getProvincia().toLowerCase().contains("ba"));
+				System.out.println(c + " " + c.getProvincia().getProvincia());
+		});
+	}
 	
 }
