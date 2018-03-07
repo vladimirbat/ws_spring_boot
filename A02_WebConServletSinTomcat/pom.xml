@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>A02_WebConServlet</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>A02_WebConServletSinTomcat</artifactId>
+	<version>1</version>
 	<packaging>war</packaging>
 
-	<name>A02_WebConServlet</name>
+	<name>A02_WebConServletSinTomcat</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -38,6 +38,11 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
