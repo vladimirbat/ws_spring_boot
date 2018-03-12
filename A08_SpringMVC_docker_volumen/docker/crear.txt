@@ -1,0 +1,2 @@
+docker build -t a08 .
+docker run --name web1 -p 8080:8080 -v /c/Users/vladi/volumenes_docker/volu:/home/volu a08
