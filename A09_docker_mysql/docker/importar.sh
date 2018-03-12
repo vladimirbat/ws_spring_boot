@@ -1,0 +1,1 @@
+mysql -u root --password="adminadmin" datos < /tmp/datos.sql

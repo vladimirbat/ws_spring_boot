@@ -1,0 +1,2 @@
+docker build -t db_img .
+docker run --name db -p 3306:3306 db_img
